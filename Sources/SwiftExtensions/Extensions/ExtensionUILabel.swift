@@ -24,4 +24,10 @@ public extension UILabel {
         asteric.centerXAnchor.constraint(equalTo: trailingAnchor, constant: 6).isActive = true
         asteric.centerYAnchor.constraint(equalTo: centerYAnchor, constant: yOffset).isActive = true
     }
+    
+    func transitionChangeText(_ text: String, animationOptions: UIView.AnimationOptions = .transitionCrossDissolve) {
+        UIView.transition(with: self, duration: 0.16, options: animationOptions) {
+            self.text = text
+        }
+    }
 }

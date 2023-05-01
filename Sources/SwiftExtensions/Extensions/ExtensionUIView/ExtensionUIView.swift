@@ -154,4 +154,30 @@ public extension UIView
         separatorView.heightAnchor.constraint(equalToConstant: lineWidth).isActive = true
         return separatorView
     }
+    
+    func fadeIn(duration: CGFloat = 0.4, delay: CGFloat = 0.0, completion: ((Bool) -> Void)? = nil) {
+
+        guard self.alpha < 1 else {
+            return
+        }
+
+        UIView.animate(withDuration: duration, delay: delay) {
+            self.alpha = 1
+        } completion: { finished in
+            completion?(finished)
+        }
+    }
+
+    func fadeOut(duration: CGFloat = 0.4, delay: CGFloat = 0.0, completion: ((Bool) -> Void)? = nil) {
+
+        guard self.alpha > 0 else {
+            return
+        }
+
+        UIView.animate(withDuration: duration, delay: delay) {
+            self.alpha = 0
+        } completion: { finished in
+            completion?(finished)
+        }
+    }
 }
