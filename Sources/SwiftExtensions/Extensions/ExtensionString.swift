@@ -7,10 +7,8 @@
 
 import UIKit
 
-extension String
+public extension String
 {
-    //String Extension Variables
-    
     // Return Empty, Non-Empty Status
     var isNotEmpty: Bool
     {
@@ -40,23 +38,8 @@ extension String
     // checks if the current string has at least 8 characters
     var isAtLeastEightCharacters : Bool
     {
-        if self.count >= 8
-        { return true } else { return false }
+        isAtLeasetCharacters(8)
     }
-    
-    // checks if the current string has at least 7 characters
-    var isAtLeastSevenCharacters : Bool
-    {
-        if self.count >= 7
-        { return true } else { return false }
-    }
-    
-    //makes and stores attributed string of the current string
-//    var asAttributedString: NSAttributedString?
-//    {
-//        guard let data = self.data(using: .utf8) else { return nil }
-//        return try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-//    }
     
     //verify that the string has at least a space
     var hasSpace: Bool
@@ -133,11 +116,16 @@ extension String
         range: NSRange(location: 0, length: attributeString.length))
         return attributeString
     }
+    
+    func isAtLeasetCharacters(_ num: Int) -> Bool {
+        if self.count >= num
+        { return true } else { return false }
+    }
 }
 
 
 //external copied
-extension String {
+public extension String {
 
     func widthOfString(usingFont font: UIFont) -> CGFloat {
         let fontAttributes = [NSAttributedString.Key.font: font]

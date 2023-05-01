@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UINavigationController {
+public extension UINavigationController {
     
     func popToViewController(ofType type: AnyClass) {
         let viewControllers: [UIViewController] = self.viewControllers.reversed()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIViewController
+public extension UIViewController
 {
     func addChildViaConstraints(child: UIViewController, toView: UIView)
     {
@@ -55,15 +55,15 @@ extension UIViewController
     }
     @objc private func handleViewTap() { self.view.endEditing(true) }
     
-//    func navigate(to vc: AnyClass) {
-//        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-//        for viewcontroller in viewControllers {
-//            if viewcontroller.isKind(of: vc){
-//                self.navigationController!.popToViewController(viewcontroller, animated: true)
-//
-//            }
-//        }
-//    }
+    func navigate(to vc: AnyClass) {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        for viewcontroller in viewControllers {
+            if viewcontroller.isKind(of: vc){
+                self.navigationController!.popToViewController(viewcontroller, animated: true)
+
+            }
+        }
+    }
     
     func showAlertView(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

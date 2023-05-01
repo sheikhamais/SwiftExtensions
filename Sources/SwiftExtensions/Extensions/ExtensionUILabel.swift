@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-extension UILabel {
+public extension UILabel {
     
-    public func placeAsteric(fontSize: CGFloat = 24, yOffset: CGFloat = -6) {
+    func setTrailingAsteric(fontSize: CGFloat = 24, yOffset: CGFloat = -6) {
         
         let asteric = UILabel()
         asteric.translatesAutoresizingMaskIntoConstraints = false

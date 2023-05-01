@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date
+public extension Date
 {
     var afterCurrentDate: Bool {
         return Date() < self
@@ -27,13 +27,13 @@ extension Date
         return cal.date(byAdding: .month, value: n, to: self)!
     }
     
-    public func stringValue(format: String = "MM-dd-yyyy HH:mm") -> String {
+    func stringValue(format: String = "MM-dd-yyyy HH:mm") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
     
-    public func stringValueFromUTC(format: String = "MM-dd-yyyy HH:mm") -> String {
+    func stringValueFromUTC(format: String = "MM-dd-yyyy HH:mm") -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = TimeZone(identifier: "UTC")

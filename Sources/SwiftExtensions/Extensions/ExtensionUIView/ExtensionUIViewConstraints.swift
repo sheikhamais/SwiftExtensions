@@ -8,65 +8,65 @@
 import UIKit
 
 //MARK: - Constraints Extensions
-extension UIView {
+public extension UIView {
     
     //pinning all
-    public func pinToView(_ view: UIView, padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+    func pinToView(_ view: UIView, padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
         pinToViewCommon(view: view, padding: padding)
     }
     
-    public func pinToSuperview(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+    func pinToSuperview(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
         if let parentView = superview {
             pinToViewCommon(view: parentView, padding: padding)
         }
     }
     
     //horizontal, vertical pins
-    public func pinHorizontallyToView(_ view: UIView, padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+    func pinHorizontallyToView(_ view: UIView, padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
         pinHorizontallyToViewCommon(view: view, padding: padding)
     }
     
-    public func pinHorizontallyToSuperview(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+    func pinHorizontallyToSuperview(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
         if let parentView = superview {
             pinHorizontallyToViewCommon(view: parentView, padding: padding)
         }
     }
     
-    public func pinVerticallyToView(_ view: UIView, padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+    func pinVerticallyToView(_ view: UIView, padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
         pinVerticallyToViewCommon(view: view, padding: padding)
     }
     
-    public func pinVerticallyToSuperview(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
+    func pinVerticallyToSuperview(padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)) {
         if let parentView = superview {
             pinVerticallyToViewCommon(view: parentView, padding: padding)
         }
     }
     
     //centerring constraints
-    public func centerToView(view: UIView) {
+    func centerToView(view: UIView) {
         centerToViewCommon(view: view)
     }
     
-    public func centerToSuperview() {
+    func centerToSuperview() {
         if let parentView = superview {
             centerToViewCommon(view: parentView)
         }
     }
     
-    public func centerXToSuperview(offset: CGFloat = 0) {
+    func centerXToSuperview(offset: CGFloat = 0) {
         if let parentView = superview {
             centerXAnchor.constraint(equalTo: parentView.centerXAnchor, constant: offset).isActive = true
         }
     }
     
-    public func centerYToSuperview(offset: CGFloat = 0) {
+    func centerYToSuperview(offset: CGFloat = 0) {
         if let parentView = superview {
             centerYAnchor.constraint(equalTo: parentView.centerYAnchor, constant: offset).isActive = true
         }
     }
     
     //height width constraints
-    public func setSize(_ size: CGSize) {
+    func setSize(_ size: CGSize) {
         heightAnchor.constraint(equalToConstant: size.height).isActive = true
         widthAnchor.constraint(equalToConstant: size.width).isActive = true
     }
@@ -107,9 +107,9 @@ extension UIView {
 }
 
 // MARK: - Constraint Modifications
-extension UIView {
+public extension UIView {
     
-    public func setPadding(padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
+    func setPadding(padding: UIEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8),
                            toInsets: [NSLayoutConstraint.Attribute])
     {
         guard let superview = superview else {
@@ -142,7 +142,7 @@ extension UIView {
         layoutIfNeeded()
     }
     
-    public func removeTrailingConstraintWrtSuperview() {
+    func removeTrailingConstraintWrtSuperview() {
         
         guard let superview = self.superview else {
             return
@@ -158,65 +158,3 @@ extension UIView {
         layoutIfNeeded()
     }
 }
-
-//Constraints Customised Way
-//extension UIView {
-//
-//    public enum ConstraintInfo {
-//        case leading(NSLayoutXAxisAnchor? = nil, CGFloat = 0)
-//        case trailing(NSLayoutXAxisAnchor? = nil, CGFloat = 0)
-//        case top(NSLayoutYAxisAnchor? = nil, CGFloat = 0)
-//        case bottom(NSLayoutYAxisAnchor? = nil, CGFloat = 0)
-//        case fixWidth(CGFloat)
-//        case fixHeight(CGFloat)
-//        case width(NSLayoutDimension, CGFloat = 1)
-//        case height(NSLayoutDimension, CGFloat = 1)
-//        case centerX(NSLayoutXAxisAnchor? = nil, CGFloat = 1)
-//        case centerY(NSLayoutYAxisAnchor? = nil, CGFloat = 1)
-//    }
-//
-//    public func constraints(_ constraints: [ConstraintInfo]) {
-//
-//        constraints.forEach { constraint in
-//
-//            switch constraint {
-//
-//            case .leading(let anchor, let constant):
-//                guard let anchor = anchor ?? superview?.leadingAnchor else { return }
-//                leadingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
-//
-//            case .trailing(let anchor, let constant):
-//                guard let anchor = anchor ?? superview?.trailingAnchor else { return }
-//                trailingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
-//
-//            case .top(let anchor, let constant):
-//                guard let anchor = anchor ?? superview?.topAnchor else { return }
-//                topAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
-//
-//            case .bottom(let anchor, let constant):
-//                guard let anchor = anchor ?? superview?.bottomAnchor else { return }
-//                bottomAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
-//
-//            case .fixWidth(let width):
-//                widthAnchor.constraint(equalToConstant: width).isActive = true
-//
-//            case .fixHeight(let height):
-//                heightAnchor.constraint(equalToConstant: height).isActive = true
-//
-//            case .width(let dimension, let multiplier):
-//                widthAnchor.constraint(equalTo: dimension, multiplier: multiplier).isActive = true
-//
-//            case .height(let dimension, let multiplier):
-//                heightAnchor.constraint(equalTo: dimension, multiplier: multiplier).isActive = true
-//
-//            case .centerX(let anchor, let constant):
-//                guard let anchor = anchor ?? superview?.centerXAnchor else { return }
-//                centerXAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
-//
-//            case .centerY(let anchor, let constant):
-//                guard let anchor = anchor ?? superview?.centerYAnchor else { return }
-//                centerYAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
-//            }
-//        }
-//    }
-//}

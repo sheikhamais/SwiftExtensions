@@ -7,16 +7,11 @@
 
 import UIKit
 
-extension UIView
+public extension UIView
 {
-    // MARK: - Section Name
     var globalFrame: CGRect {
         return self.convert(self.bounds, to: nil)
     }
-    
-    // MARK: - Section Name
-    func addCornerRadius(_ radius: CGFloat = 8.0)
-    { self.layer.cornerRadius = radius }
     
     func addCornerRadiusTo(cornerRadius: CGFloat = 8, corners: CACornerMask)
     {
@@ -124,7 +119,7 @@ extension UIView
         }
     }
     
-    public func makeRepeatingRotations(duration: TimeInterval = 1, delay: TimeInterval = 0, animatingOptions: UIView.AnimationOptions = [.curveEaseInOut], angle: CGFloat = .pi) {
+    func makeRepeatingRotations(duration: TimeInterval = 1, delay: TimeInterval = 0, animatingOptions: UIView.AnimationOptions = [.curveEaseInOut], angle: CGFloat = .pi) {
         UIView.animate(withDuration: duration, delay: delay, options: animatingOptions) {
             self.transform = CGAffineTransform(rotationAngle: angle)
         } completion: { _ in
@@ -133,12 +128,12 @@ extension UIView
         }
     }
     
-    internal func addBorder(color: UIColor = .nhsLightGray, lineWidth: CGFloat = 1) {
+    func addBorder(color: UIColor = .black, lineWidth: CGFloat = 1) {
         layer.borderColor = color.cgColor
         layer.borderWidth = lineWidth
     }
     
-    public func addEndEditingGesture()
+    func addEndEditingGesture()
     {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(handleViewTap))
         gesture.cancelsTouchesInView = false
@@ -146,86 +141,17 @@ extension UIView
     }
     @objc private func handleViewTap() { self.endEditing(true) }
     
-//    @discardableResult
-//    internal func addBottomSeparator(color: UIColor = .nhsLightGray, lineWidth: CGFloat = 1) -> HorizontalSeparatorView {
-//        let separatorView = HorizontalSeparatorView(lineWidth: lineWidth)
-//        separatorView.backgroundColor = color
-//        addSubview(separatorView)
-//        separatorView.pinHorizontallyToSuperview()
-//        separatorView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-//        return separatorView
-//    }
+    @discardableResult
+    func addBottomSeparator(color: UIColor = .darkGray, lineWidth: CGFloat = 1) -> UIView {
+        
+        let separatorView = UIView()
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.backgroundColor = color
+        
+        addSubview(separatorView)
+        separatorView.pinHorizontallyToSuperview()
+        separatorView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        separatorView.heightAnchor.constraint(equalToConstant: lineWidth).isActive = true
+        return separatorView
+    }
 }
-
-////MARK: - NhsProgressView extension
-//extension UIView {
-//    public func showProgressView(title: String? = nil) {
-//
-//        //disable interaction
-//        isUserInteractionEnabled = false
-//
-//        //logic to show view
-//        if let existingViewInfo = NhsProgressViewCounter.views[self],
-//           existingViewInfo.0 > 0 {
-//            //already progress view is displayed, increase counter
-//            NhsProgressViewCounter.views[self] = (existingViewInfo.0 + 1, existingViewInfo.1)
-//        } else {
-//            //show progress view
-//            let progressView = NhsProgressView(title: title)
-//            self.addSubview(progressView)
-//            NSLayoutConstraint.activate([
-//                progressView.leadingAnchor.constraint(equalTo: leadingAnchor),
-//                progressView.trailingAnchor.constraint(equalTo: trailingAnchor),
-//                progressView.topAnchor.constraint(equalTo: topAnchor),
-//                progressView.bottomAnchor.constraint(equalTo: bottomAnchor)
-//            ])
-//
-//            //set value in dictionary
-//            NhsProgressViewCounter.views[self] = (1, progressView)
-//        }
-//    }
-//
-//    public func hideProgressView() {
-//        if let existingViewInfo = NhsProgressViewCounter.views[self],
-//           existingViewInfo.0 > 0 {
-//
-//            if existingViewInfo.0 == 1 {
-//                DispatchQueue.main.async {
-//                    existingViewInfo.1.removeFromSuperview()
-//                    self.isUserInteractionEnabled = true
-//                }
-//            }
-//
-//            NhsProgressViewCounter.views[self] = (existingViewInfo.0 - 1, existingViewInfo.1)
-//        }
-//    }
-//}
-
-//// MARK: - Nhs Toast View
-//extension UIView {
-//
-//    func showSuccessToast(withTitle title: String = "Success", withSubTitle subTitle: String, duration: CGFloat = 3, handler: VoidHandler? = nil) {
-//
-//        let toast = NhsToastView(style: .success, heading: title, subHeading: subTitle, toastStayDuration: duration) { thisToast in
-//            thisToast.removeFromSuperview()
-//            handler?()
-//        }
-//
-//        addSubview(toast)
-//        toast.pinHorizontallyToSuperview(padding: .init(top: 0, left: 12, bottom: 0, right: 12))
-//        toast.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
-//    }
-//
-//    func showErrorToast(withTitle title: String = "Error", withSubTitle subTitle: String, duration: CGFloat = 3, handler: VoidHandler? = nil) {
-//
-//        let toast = NhsToastView(style: .error, heading: title, subHeading: subTitle, toastStayDuration: duration) { thisToast in
-//            thisToast.removeFromSuperview()
-//            handler?()
-//        }
-//
-//        addSubview(toast)
-//        toast.pinHorizontallyToSuperview(padding: .init(top: 0, left: 12, bottom: 0, right: 12))
-//        toast.topAnchor.constraint(equalTo: topAnchor, constant: 12).isActive = true
-//    }
-//}
-//

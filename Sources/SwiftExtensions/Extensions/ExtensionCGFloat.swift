@@ -5,19 +5,15 @@
 //  Created by Amais Sheikh	 on 23/08/2022.
 //
 
-import UIKit
+import Foundation
 
-extension CGFloat {
+public extension CGFloat {
+    
     var cappedZeroToOne: CGFloat {
         return Swift.max(Swift.min(self, 1), 0)
     }
     
-    var autoSized: CGFloat {
-        let screenWidth = UIScreen.main.bounds.size.width
-        let screenHeight = UIScreen.main.bounds.size.height
-        let diagonalSize = sqrt((screenWidth * screenWidth) + (screenHeight * screenHeight))
-        let percentage = CGFloat(self)/1020*100 //1020 is the diagonal size of iphone 12 pro max
-        return diagonalSize * percentage / 100
+    var dynamicSized: Double {
+        return Double(self).dynamicSizeValue
     }
 }
-    
